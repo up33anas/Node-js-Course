@@ -1,0 +1,27 @@
+{
+  "name": "node.js-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/up33anas/Node-js-Course.git"
+  },
+  "author": "anas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/up33anas/Node-js-Course/issues"
+  },
+  "homepage": "https://github.com/up33anas/Node-js-Course#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "uuid": "^11.1.0"
+  }
+}
