@@ -9,7 +9,7 @@ const logEvents = async (message, logName = "appLog.txt") => {
   const logItem = `${dateTime}\t${uuid()}\t${message}\n`;
 
   try {
-    const logDir = path.join(__dirname, "logs");
+    const logDir = path.join(__dirname, "..", "logs");
 
     if (!fs.existsSync(logDir)) {
       await fsPromises.mkdir(logDir);
@@ -25,4 +25,10 @@ const logEvents = async (message, logName = "appLog.txt") => {
   }
 };
 
-module.exports = logEvents;
+const logger = (req, res, next) => {
+  logEvents(`${req.method}\t${req.headers.origin}\t${req.url}`, "reqLog.txt");
+  console.log(`${req.method} ${req.path}`);
+  next();
+};
+
+module.exports = { logger, logEvents };
