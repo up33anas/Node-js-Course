@@ -23,3 +23,15 @@
 20250831	22:35:25	5bf996e1-aa0c-4f68-be12-0e6ef6547acd	GET	undefined	/css/style.css
 20250831	22:35:25	b32919df-6c8e-4320-9bfb-0defedca69cd	GET	undefined	/favicon.ico
 20250831	22:39:04	fc585143-b4a0-4e22-a132-e48fa3be73c3	GET	undefined	/data/data.txt
+20250901	22:39:30	621bfb5b-871a-4e00-ae50-28a3d09d03bb	GET	undefined	/
+20250901	22:39:30	828d071c-623f-49a5-888c-3a58f65eba48	GET	undefined	/css/style.css
+20250901	22:39:30	6352b002-e08f-4db1-a874-2babb82701f5	GET	undefined	/favicon.ico
+20250901	22:39:38	37ba9dd3-80c5-40c5-bb36-c29543acf893	GET	undefined	/subdir/f
+20250901	22:39:38	f61428df-5e64-43cb-9ae6-b73571e3dbdf	GET	undefined	/subdir/css/style.css
+20250901	23:03:08	5c06371f-86b0-4076-a524-fbe176ca2ab1	GET	undefined	/employees
+20250901	23:06:06	3a3d1ab9-a37f-4dc4-a296-667eb8c6878b	GET	undefined	/employees
+20250901	23:06:06	dedd7444-8935-48a8-b4c5-db5a84a65822	GET	undefined	/favicon.ico
+20250901	23:06:13	b6021dd5-a519-4f1a-a351-47b524a6881e	GET	undefined	/employees/2
+20250901	23:06:18	ec7767c5-02b3-4751-a382-059f6d8e811f	GET	undefined	/employees/
+20250901	23:06:52	2a6d9b00-4440-46a6-afbd-31489f71a36c	GET	undefined	/employees/1
+20250901	23:06:57	4f799e96-5f33-4e13-ad08-e741b9591373	GET	undefined	/employees
