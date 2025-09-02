@@ -1,0 +1,15 @@
+### Get all users
+GET https://jsonplaceholder.typicode.com/users
+Accept: application/json
+
+### Get single user
+GET http://localhost:3500/employees/
+
+### Create a new post
+POST http://localhost:3500/auth
+Content-Type: application/json
+
+{
+  "user": "Ahhhh",
+  "pwd": "abc"
+}
