@@ -35,3 +35,8 @@
 20250901	23:06:18	ec7767c5-02b3-4751-a382-059f6d8e811f	GET	undefined	/employees/
 20250901	23:06:52	2a6d9b00-4440-46a6-afbd-31489f71a36c	GET	undefined	/employees/1
 20250901	23:06:57	4f799e96-5f33-4e13-ad08-e741b9591373	GET	undefined	/employees
+20250902	13:32:28	15c64ef5-56f1-41fb-99f8-ce88363887a7	GET	undefined	/
+20250902	13:32:28	3685d50f-124d-4955-8f19-4f4179e36ca7	GET	undefined	/css/style.css
+20250902	13:32:28	33df7584-625a-4d66-a6d7-5219efbef516	GET	undefined	/favicon.ico
+20250902	13:32:34	a04aa112-5459-4e92-8bb6-b54234ff40ce	GET	undefined	/employees
+20250902	13:32:34	dda2c6ee-a10d-4380-a65a-e08d7b9765c4	GET	undefined	/favicon.ico
