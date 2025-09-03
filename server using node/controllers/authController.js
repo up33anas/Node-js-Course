@@ -24,9 +24,16 @@ const handleLogin = async (req, res) => {
 
   const correctPassword = await bcrypt.compare(pwd, foundUser.pwd); // or foundUser.password depending on your file
   if (correctPassword) {
+    const roles = Object.values(foundUser.roles);
+    console.log(roles);
     // create JWTs
     const accessToken = jwt.sign(
-      { username: foundUser.username },
+      {
+        UserInfo: {
+          username: foundUser.username,
+          roles: roles,
+        },
+      },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "30s" }
     );
