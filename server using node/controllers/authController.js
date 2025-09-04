@@ -7,7 +7,6 @@ const usersDB = {
 const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const fsPromises = require("fs").promises;
 const path = require("path");
 
@@ -22,7 +21,7 @@ const handleLogin = async (req, res) => {
   const foundUser = usersDB.users.find((u) => u.username === user);
   if (!foundUser) return res.sendStatus(401); // Unauthorized
 
-  const correctPassword = await bcrypt.compare(pwd, foundUser.pwd); // or foundUser.password depending on your file
+  const correctPassword = await bcrypt.compare(pwd, foundUser.password); // or foundUser.password depending on your file
   if (correctPassword) {
     const roles = Object.values(foundUser.roles);
     console.log(roles);
