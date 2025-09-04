@@ -1,21 +1,24 @@
-const usersDB = {
-  users: require("../models/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
+const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 const handleRefreshToken = async (req, res) => {
+  console.log("Cookies received:", req.cookies);
+
   const cookies = req.cookies;
-  if (!cookies?.jwt) return res.status(401);
+  if (!cookies?.jwt) {
+    console.log("cookie not found");
+    return res.status(401);
+  }
   const refreshToken = cookies.jwt;
 
-  const foundUser = usersDB.users.find((u) => u.refreshToken === refreshToken);
-  if (!foundUser) return res.sendStatus(401); // Unauthorized
+  const foundUser = await User.findOne({ refreshToken }).exec();
+  if (!foundUser) {
+    console.log("User not found");
+    return res.sendStatus(401);
+  } // Unauthorized
 
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-    if (err) return res.sendStatus(403);
+    if (err) return res.sendStatus(403); // Forbidden
     const roles = Object.values(foundUser.roles);
     const accessToken = jwt.sign(
       {

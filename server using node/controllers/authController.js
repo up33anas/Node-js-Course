@@ -1,14 +1,6 @@
-const usersDB = {
-  users: require("../models/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
+const User = require("../models/User");
 const bcrypt = require("bcrypt");
-
 const jwt = require("jsonwebtoken");
-const fsPromises = require("fs").promises;
-const path = require("path");
 
 const handleLogin = async (req, res) => {
   const { user, pwd } = req.body;
@@ -18,54 +10,43 @@ const handleLogin = async (req, res) => {
       .json({ message: "Username and password are required" });
   }
 
-  const foundUser = usersDB.users.find((u) => u.username === user);
-  if (!foundUser) return res.sendStatus(401); // Unauthorized
+  const foundUser = await User.findOne({ username: user }).exec();
+  if (!foundUser) return res.status(401).json({ message: "Unauthorized" });
 
-  const correctPassword = await bcrypt.compare(pwd, foundUser.password); // or foundUser.password depending on your file
-  if (correctPassword) {
-    const roles = Object.values(foundUser.roles);
-    console.log(roles);
-    // create JWTs
-    const accessToken = jwt.sign(
-      {
-        UserInfo: {
-          username: foundUser.username,
-          roles: roles,
-        },
+  const correctPassword = await bcrypt.compare(pwd, foundUser.password);
+  if (!correctPassword)
+    return res.status(401).json({ message: "Unauthorized" });
+
+  const roles = Object.values(foundUser.roles).filter(Boolean);
+
+  const accessToken = jwt.sign(
+    {
+      UserInfo: {
+        username: foundUser.username,
+        roles,
       },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "30s" }
-    );
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "30s" }
+  );
 
-    const refreshToken = jwt.sign(
-      { username: foundUser.username },
-      process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1d" }
-    );
+  const refreshToken = jwt.sign(
+    { username: foundUser.username },
+    process.env.REFRESH_TOKEN_SECRET,
+    { expiresIn: "1d" }
+  );
 
-    // saving refresh token with current user
-    const otherUsers = usersDB.users.filter(
-      (u) => u.username != foundUser.username
-    );
+  foundUser.refreshToken = refreshToken;
+  await foundUser.save();
 
-    const currentUser = { ...foundUser, refreshToken };
+  res.cookie("jwt", refreshToken, {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true, // change to true in production (HTTPS)
+    maxAge: 24 * 60 * 60 * 1000,
+  });
 
-    usersDB.setUsers([...otherUsers, currentUser]);
-    await fsPromises.writeFile(
-      path.join(__dirname, "..", "models", "users.json"),
-      JSON.stringify(usersDB.users)
-    );
-
-    res.cookie("jwt", refreshToken, {
-      httpOnly: true,
-      sameSite: "None",
-      secure: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-    res.json({ accessToken });
-  } else {
-    return res.sendStatus(401); // Unauthorized
-  }
+  res.json({ accessToken });
 };
 
 module.exports = { handleLogin };
