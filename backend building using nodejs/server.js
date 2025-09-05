@@ -19,7 +19,6 @@ connectDB();
 
 // custom middleware logger
 app.use(logger);
-
 app.use(credentials);
 
 // Cross Origin Resource Sharing with whitelist
