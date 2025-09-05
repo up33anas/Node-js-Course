@@ -36,13 +36,13 @@ This repository documents my journey of learning Node.js step by step, from the 
   - `verifyJWT` middleware for protected routes
 - **Role‑Based Access Control (RBAC)** authorization
 
-### 🗄 Database
+### Database
 
 - Connecting Node.js with **MongoDB** (Mongoose)
 - Environment‑based connection config
 - Basic CRUD patterns (create, read, update, delete)
 
-### 🛠 Tooling & Utilities
+### Tooling & Utilities
 
 - **dotenv** for environment variables
 - API testing with **Thunder Client / Postman**
